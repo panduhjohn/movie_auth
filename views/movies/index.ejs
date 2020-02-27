@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie API</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>My movies api</h1>
+    <% if(user) { %>
+    <p>Welcome <%= user.name %> to the page</p>
+    <% }  %>
+    
+
+
+    <a href="/movies/getallmovies">List of all movies</a></br>
+    <a href="/movies/addmovie">Add a movie to the list</a><br>
+    <a href="/movies/findmovie">Find a movie</a>
+  </body>
+</html>
