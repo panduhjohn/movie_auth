@@ -14,8 +14,8 @@ router.get('/getallusers', userController.getAllUsers);
 
 router.post('/register', userController.registerUser);
 router.post('/login', userController.loginUser);
+router.get('/logout', userController.logoutUser);
 // router.put('/:title', userController.updateMovie);
-// router.delete('/:title', userController.deleteMovie);
-// router.get('/findmovie', userController.findMovie);
+
 
 module.exports = router;

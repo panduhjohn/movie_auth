@@ -70,7 +70,7 @@ module.exports = {
                                     .json({ message: 'Server Error', err });
                             } else {
                                 console.log('login: ', req.session);
-                                res.redirect('/users/success');
+                                return res.redirect('success');
                             }
                         });
                     })
@@ -101,8 +101,7 @@ module.exports = {
                                     .json({ message: 'Incorrect credentials' });
                             } else {
                                 // return res.status(200).json({ message: 'You are now logged in', user});
-                                
-                                res.redirect('/users/success');
+                                return res.redirect('/users/success');
                             }
                         })
                         .catch(err =>
@@ -123,6 +122,13 @@ module.exports = {
                 .json({ message: 'All inputs must be filled' });
         }
     },
+
+    logoutUser: (req, res) => {
+        req.session.destroy();
+        console.log('logout: ', req.session);
+        req.logout();
+        return res.redirect('/');
+    }
 
 
 };
