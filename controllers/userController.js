@@ -1,4 +1,3 @@
-
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 require('../lib/passport');
@@ -20,17 +19,6 @@ module.exports = {
     },
     renderFail: (req, res) => {
         res.render('users/fail');
-    },
-
-    getAllUsers: (req, res) => {
-        //empty object allows is to fill with users
-        User.find({})
-            .then(users => {
-                res.render('users/getUsers', {users});
-            })
-            .catch(err =>
-                res.status(500).json({ message: 'Server Error', err })
-            );
     },
 
     registerUser: (req, res) => {
@@ -70,7 +58,7 @@ module.exports = {
                                     .json({ message: 'Server Error', err });
                             } else {
                                 console.log('login: ', req.session);
-                                return res.redirect('success');
+                                return res.render('movies/index');
                             }
                         });
                     })
@@ -101,16 +89,14 @@ module.exports = {
                                     .json({ message: 'Incorrect credentials' });
                             } else {
                                 // return res.status(200).json({ message: 'You are now logged in', user});
-                                return res.redirect('/users/success');
+                                res.render('movies/index');
                             }
                         })
                         .catch(err =>
-                            res
-                                .status(403)
-                                .json({
-                                    message: 'Passwords do not match',
-                                    err
-                                })
+                            res.status(403).json({
+                                message: 'Passwords do not match',
+                                err
+                            })
                         );
                 })
                 .catch(err =>
@@ -128,9 +114,16 @@ module.exports = {
         console.log('logout: ', req.session);
         req.logout();
         return res.redirect('/');
+    },
+
+    login: passport.authenticate('local-login', {
+        successRedirect: '/movies/index',
+        failureRedirect: '/users/login'
+    }),
+
+    notFound: (req, res) => {
+        return res.render('404')
     }
-
-
 };
 
 // // find all Users
@@ -144,8 +137,6 @@ module.exports = {
 // router.get('/fail', (req, res) => {
 //     return res.render('fail');
 // });
-
-
 
 // router.put('/update/:id', (req, res) => {
 //     //search for user in DB based on parameters
@@ -217,4 +208,3 @@ module.exports = {
 //         })
 //         .catch(err => res.status(500).json({ message: 'Server Error', err }));
 // });
-

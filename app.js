@@ -7,6 +7,7 @@ const chalk = require('chalk');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
+const methodOverride = require('method-override')
 
 //mongostore must be below session
 let MongoStore = require('connect-mongo')(session);
@@ -41,6 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 //create session middleware
 app.use(

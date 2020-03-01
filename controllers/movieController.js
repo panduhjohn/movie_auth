@@ -20,7 +20,7 @@ module.exports = {
             .then(movie => {
                 if (movie) {
                     //render the findMovie page
-                    return res.render('findMovie', { movie });
+                    return res.render('movies/findMovie', { movie });
                 } else {
                     return res.status(400).json({ message: 'No MOVIE found' });
                 }
@@ -161,14 +161,18 @@ module.exports = {
     },
 
     renderAddMovies: (req, res) => {
-        return res.render('addMovie');
+        return res.render('movies/addMovie');
     },
 
     renderIndex: (req, res) => {
-        res.render('index');
+        res.render('movies/index');
     },
 
     findMovie: (req, res) => {
-        return res.render('findMovie', { movie: null });
+        return res.render('movies/findMovie', { movie: null });
+    },
+
+    notFound: (req, res) => {
+        return res.render('404');
     }
 };

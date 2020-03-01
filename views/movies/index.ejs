@@ -5,15 +5,17 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>My movies api</h1>
+    <h1>MOVIE LANDING PAGE</h1>
+
     <% if(user) { %>
-    <p>Welcome <%= user.name %> to the page</p>
+        <p>Welcome <%= user.name %> to the page</p>
     <% }  %>
     
 
 
     <a href="/movies/getallmovies">List of all movies</a></br>
-    <a href="/movies/addmovie">Add a movie to the list</a><br>
-    <a href="/movies/findmovie">Find a movie</a>
+    <a href="/movies/addmovie">Add a movie to the list</a></br>
+    <a href="/movies/findmovie">Find a movie</a></br>
+    <a href="/users/logout">Logout</a>
   </body>
 </html>
