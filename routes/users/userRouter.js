@@ -11,7 +11,8 @@ router.get('/logout', userController.logoutUser);
 router.get('/*', userController.notFound)
 
 router.post('/register', userController.registerUser);
-router.post('/login', userController.loginUser);
+router.post('/login', userController.login);
+// router.post('/login', userController.loginUser);
 // router.put('/:title', userController.updateMovie);
 
 

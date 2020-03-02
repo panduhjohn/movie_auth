@@ -9,7 +9,7 @@ router.get('/addmovie', movieController.renderAddMovies);
 router.get('/getallmovies', movieController.getAllMovies);
 router.get('/foundmovie', movieController.foundMovies);
 router.post('/addmovie', movieController.addMovie);
-router.put('/:title', movieController.updateMovie);
+router.put('/:title',  movieController.updateMovie);
 router.delete('/:title', movieController.deleteMovie);
 router.get('/findmovie', movieController.findMovie);
 router.get('/*', movieController.notFound);

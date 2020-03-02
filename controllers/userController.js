@@ -58,7 +58,7 @@ module.exports = {
                                     .json({ message: 'Server Error', err });
                             } else {
                                 console.log('login: ', req.session);
-                                return res.render('movies/index');
+                                return res.render('movies/index', { user });
                             }
                         });
                     })
@@ -69,45 +69,7 @@ module.exports = {
             .catch(err =>
                 res.status(500).json({ message: 'Server Error', err })
             );
-    },
-
-    loginUser: (req, res) => {
-        // const {name, email, password} = req.body
-        //validate input
-        if (req.body.email && req.body.password) {
-            //find user
-            User.findOne({ email: req.body.email })
-                .then(user => {
-                    //compare password
-                    //bcrypt returns a true or false as result
-                    bcrypt
-                        .compare(req.body.password, user.password)
-                        .then(result => {
-                            if (!result) {
-                                return res
-                                    .status(403)
-                                    .json({ message: 'Incorrect credentials' });
-                            } else {
-                                // return res.status(200).json({ message: 'You are now logged in', user});
-                                res.render('movies/index');
-                            }
-                        })
-                        .catch(err =>
-                            res.status(403).json({
-                                message: 'Passwords do not match',
-                                err
-                            })
-                        );
-                })
-                .catch(err =>
-                    res.status(500).json({ message: 'No user exists', err })
-                );
-        } else {
-            return res
-                .status(403)
-                .json({ message: 'All inputs must be filled' });
-        }
-    },
+    },          
 
     logoutUser: (req, res) => {
         req.session.destroy();
@@ -117,7 +79,7 @@ module.exports = {
     },
 
     login: passport.authenticate('local-login', {
-        successRedirect: '/movies/index',
+        successRedirect: '/movies',
         failureRedirect: '/users/login'
     }),
 
